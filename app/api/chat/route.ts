@@ -1,4 +1,11 @@
-// SSE streaming chat endpoint — wires the prototype to real Gemini.
+/**
+ * Nexus AI — Chat SSE Endpoint
+ * Streams real-time Gemini responses with tool orchestration.
+ *
+ * @author Harman Hanjra <https://github.com/harmanhanjra>
+ * @license MIT
+ */
+
 import { NextRequest } from 'next/server';
 import { streamAgentResponse, ChatTurn } from '@/lib/llm';
 import { getAgent } from '@/lib/agents';

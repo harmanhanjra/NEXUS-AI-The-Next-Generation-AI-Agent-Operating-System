@@ -1,4 +1,11 @@
-// Gemini streaming client + tool orchestration.
+/**
+ * Nexus AI — LLM Orchestration Layer
+ * Gemini streaming client with tool routing and grounded search.
+ *
+ * @author Harman Hanjra <https://github.com/harmanhanjra>
+ * @license MIT
+ */
+
 import { GoogleGenAI } from '@google/genai';
 import { AgentConfig } from './agents';
 import { recallMemory } from './memory';

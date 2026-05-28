@@ -1,10 +1,18 @@
-# 🧠 Nexus AI — Vercel-Ready
+# 🧠 Nexus AI — The Next-Generation AI Agent Operating System
+
+> A unified AI operating system where humans and autonomous AI agents work side-by-side across web, mobile, and cloud — replacing dozens of SaaS tools with a single intelligent workspace.
+
+<p align="center">
+  <strong>Created by <a href="https://github.com/harmanhanjra">Harman Hanjra</a></strong>
+</p>
+
+<p align="center">
+  <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fharmanhanjra%2FNEXUS-AI-The-Next-Generation-AI-Agent-Operating-System&env=GEMINI_API_KEY&envDescription=Free%20Gemini%20API%20key%20from%20Google%20AI%20Studio&envLink=https%3A%2F%2Faistudio.google.com%2Fapikey">
+    <img src="https://vercel.com/button" alt="Deploy with Vercel" />
+  </a>
+</p>
 
 A production-grade AI agent platform powered by **Google Gemini**, deployable to Vercel in **under 2 minutes**.
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FYOUR_USERNAME%2Fnexus-ai&env=GEMINI_API_KEY&envDescription=Free%20Gemini%20API%20key%20from%20Google%20AI%20Studio&envLink=https%3A%2F%2Faistudio.google.com%2Fapikey)
-
-> Replace `YOUR_USERNAME/nexus-ai` in the URL above after pushing to GitHub.
 
 ---
 
@@ -22,22 +30,19 @@ A production-grade AI agent platform powered by **Google Gemini**, deployable to
 
 ## 🚀 Deploy to Vercel (3 ways)
 
-### Option A — One-click deploy (after pushing to GitHub)
-1. Push this folder to a GitHub repo
-2. Click the "Deploy with Vercel" button above
-3. Optionally add `GEMINI_API_KEY` env var (users can paste their own otherwise)
+### Option A — One-click deploy
+Click the "Deploy with Vercel" button above. You'll be prompted to add `GEMINI_API_KEY` (optional — users can paste their own).
 
-### Option B — Vercel CLI (no GitHub needed)
+### Option B — Vercel CLI
 ```bash
 npm install -g vercel
-cd nexus-vercel
 vercel
 # Follow prompts → done!
 ```
 
-### Option C — Vercel Dashboard upload
+### Option C — Vercel Dashboard
 1. Go to [vercel.com/new](https://vercel.com/new)
-2. Drag this folder, or "Import Git Repository"
+2. Import this repository
 3. Click **Deploy** — no env vars required
 
 ---
@@ -57,6 +62,8 @@ You can either:
 ## 💻 Run Locally
 
 ```bash
+git clone https://github.com/harmanhanjra/NEXUS-AI-The-Next-Generation-AI-Agent-Operating-System.git
+cd NEXUS-AI-The-Next-Generation-AI-Agent-Operating-System
 npm install
 cp .env.example .env.local
 # Add your GEMINI_API_KEY to .env.local (optional)
@@ -83,7 +90,7 @@ Customize agents in [`lib/agents.ts`](lib/agents.ts).
 ## 📁 Project Structure
 
 ```
-nexus-vercel/
+.
 ├── app/
 │   ├── api/
 │   │   ├── chat/route.ts          ← SSE streaming endpoint
@@ -150,7 +157,7 @@ Streams a Gemini response via SSE.
   "agentId": "research",
   "conversationId": "abc123",
   "message": "What's new in AI?",
-  "apiKey": "AIza..." // optional, overrides server key
+  "apiKey": "AIza..."
 }
 ```
 
@@ -178,10 +185,20 @@ Returns `{ ok: true, hasServerKey: boolean }`.
 
 ---
 
-## 🪪 License
+## 👤 Author
 
-MIT — do whatever you want.
+**Harman Hanjra**
+- GitHub: [@harmanhanjra](https://github.com/harmanhanjra)
+- Repo: [NEXUS-AI](https://github.com/harmanhanjra/NEXUS-AI-The-Next-Generation-AI-Agent-Operating-System)
 
 ---
 
-Built with the [Nexus AI Blueprint](https://github.com/YOUR_USERNAME/nexus-ai). PRs welcome!
+## 🪪 License
+
+[MIT](LICENSE) © 2026 Harman Hanjra
+
+---
+
+<p align="center">
+  Built with ❤️ by <a href="https://github.com/harmanhanjra">Harman Hanjra</a>
+</p>

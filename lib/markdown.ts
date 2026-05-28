@@ -1,4 +1,11 @@
-// Tiny dependency-free markdown renderer (safe subset).
+/**
+ * Nexus AI — Markdown Renderer
+ * Tiny dependency-free markdown renderer (safe subset).
+ *
+ * @author Harman Hanjra <https://github.com/harmanhanjra>
+ * @license MIT
+ */
+
 // Handles: headings, bold, italic, code (inline + fenced), lists, links, paragraphs.
 
 function escapeHtml(s: string): string {

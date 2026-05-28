@@ -2,6 +2,30 @@
   "name": "nexus-ai",
   "version": "1.0.0",
   "private": true,
+  "description": "A unified AI operating system where humans and autonomous AI agents work side-by-side across web, mobile, and cloud — replacing dozens of SaaS tools with a single intelligent workspace.",
+  "author": {
+    "name": "Harman Hanjra",
+    "url": "https://github.com/harmanhanjra"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/harmanhanjra/NEXUS-AI-The-Next-Generation-AI-Agent-Operating-System",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harmanhanjra/NEXUS-AI-The-Next-Generation-AI-Agent-Operating-System.git"
+  },
+  "bugs": {
+    "url": "https://github.com/harmanhanjra/NEXUS-AI-The-Next-Generation-AI-Agent-Operating-System/issues"
+  },
+  "keywords": [
+    "ai",
+    "agents",
+    "gemini",
+    "nextjs",
+    "llm",
+    "chatbot",
+    "ai-agents",
+    "agent-platform"
+  ],
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",

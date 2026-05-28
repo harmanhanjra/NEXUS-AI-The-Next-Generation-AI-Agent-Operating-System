@@ -1,4 +1,11 @@
-// Agent registry — defines persona, model, tools, and behavior
+/**
+ * Nexus AI — Agent Registry
+ * Defines persona, model, tools, and behavior for each agent.
+ *
+ * @author Harman Hanjra <https://github.com/harmanhanjra>
+ * @license MIT
+ */
+
 export type AgentId = 'research' | 'coding' | 'content' | 'business' | 'life';
 
 export interface AgentConfig {

@@ -1,4 +1,12 @@
-// In-memory storage — serverless-safe.
+/**
+ * Nexus AI — Memory Layer
+ * In-memory store with Gemini embeddings for semantic recall.
+ * Serverless-safe; for persistence, swap for Vercel Postgres or Upstash.
+ *
+ * @author Harman Hanjra <https://github.com/harmanhanjra>
+ * @license MIT
+ */
+
 // On Vercel, each function instance has its own memory and resets when cold.
 // For persistent memory, swap this layer for Vercel Postgres or Upstash Redis.
 import { GoogleGenAI } from '@google/genai';

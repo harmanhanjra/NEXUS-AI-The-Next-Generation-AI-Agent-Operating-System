@@ -1,5 +1,14 @@
 'use client';
 
+/**
+ * Nexus AI — Main App Component
+ * Multi-agent chat UI with real-time SSE streaming.
+ *
+ * @author Harman Hanjra <https://github.com/harmanhanjra>
+ * @license MIT
+ */
+
+
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { AGENTS, AgentId, AgentConfig } from '@/lib/agents';
 import { renderMarkdown } from '@/lib/markdown';
@@ -349,9 +358,9 @@ function Sidebar({ currentAgentId, onAgentChange, onNewChat }: {
       ))}
 
       <div className="sidebar-footer">
-        <div className="avatar">JD</div>
+        <div className="avatar">HH</div>
         <div className="user-info">
-          <div className="user-name">Jordan Dev</div>
+          <div className="user-name">Harman Hanjra</div>
           <div className="user-plan">Powered by Gemini</div>
         </div>
       </div>
@@ -454,7 +463,7 @@ function MessageView({ message, agent }: { message: ChatMessage; agent: AgentCon
   return (
     <div className="message">
       <div className={`message-avatar ${isUser ? 'user' : ''}`} style={!isUser ? { background: agent.gradient } : undefined}>
-        {isUser ? 'JD' : agent.icon}
+        {isUser ? 'HH' : agent.icon}
       </div>
       <div className="message-content">
         <div className="message-author">
