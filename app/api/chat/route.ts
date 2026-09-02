@@ -19,19 +19,60 @@ import {
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
+const MAX_MESSAGE_LENGTH = 12_000;
+const MAX_CONVERSATION_ID_LENGTH = 128;
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX_REQUESTS = 20;
+const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
+
+function clientId(req: NextRequest) {
+  return req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'local';
+}
+
+function isRateLimited(req: NextRequest) {
+  const key = clientId(req);
+  const now = Date.now();
+  const current = rateLimitStore.get(key);
+  if (!current || current.resetAt <= now) {
+    rateLimitStore.set(key, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+  current.count += 1;
+  return current.count > RATE_LIMIT_MAX_REQUESTS;
+}
+
 export async function POST(req: NextRequest) {
-  const body = await req.json();
+  if (isRateLimited(req)) {
+    return Response.json({ error: 'Rate limit exceeded' }, { status: 429 });
+  }
+
+  let body: unknown;
+  try {
+    body = await req.json();
+  } catch {
+    return Response.json({ error: 'Invalid JSON body' }, { status: 400 });
+  }
   const {
     agentId = 'research',
     conversationId,
     message,
     apiKey: clientKey,
-  } = body as {
+  } = (body ?? {}) as {
     agentId?: string;
     conversationId: string;
     message: string;
     apiKey?: string;
   };
+
+  if (typeof conversationId !== 'string' || !conversationId.trim() || conversationId.length > MAX_CONVERSATION_ID_LENGTH) {
+    return Response.json({ error: 'Invalid conversationId' }, { status: 400 });
+  }
+  if (typeof message !== 'string' || !message.trim() || message.length > MAX_MESSAGE_LENGTH) {
+    return Response.json({ error: 'Message must be between 1 and 12000 characters' }, { status: 400 });
+  }
+  if (clientKey !== undefined && typeof clientKey !== 'string') {
+    return Response.json({ error: 'Invalid apiKey' }, { status: 400 });
+  }
 
   // Resolve API key: client (UI override) > server (.env)
   const apiKey = clientKey || process.env.GEMINI_API_KEY || '';
