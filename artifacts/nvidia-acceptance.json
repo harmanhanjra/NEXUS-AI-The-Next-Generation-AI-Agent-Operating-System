@@ -1,0 +1,116 @@
+{
+  "base": "http://localhost:3001",
+  "testedAt": "2026-09-29T04:18:09.694Z",
+  "results": [
+    {
+      "name": "NVIDIA configuration and Gemini removal",
+      "status": "passed",
+      "durationMs": 287
+    },
+    {
+      "name": "Local skill discovery and task matching",
+      "status": "passed",
+      "durationMs": 1194
+    },
+    {
+      "name": "Unavailable NVIDIA model recovers within NVIDIA",
+      "status": "passed",
+      "durationMs": 1435
+    },
+    {
+      "name": "research agent with NVIDIA streaming",
+      "status": "passed",
+      "durationMs": 619
+    },
+    {
+      "name": "coding agent with NVIDIA streaming",
+      "status": "passed",
+      "durationMs": 630
+    },
+    {
+      "name": "content agent with NVIDIA streaming",
+      "status": "passed",
+      "durationMs": 1244
+    },
+    {
+      "name": "business agent with NVIDIA streaming",
+      "status": "passed",
+      "durationMs": 653
+    },
+    {
+      "name": "life agent with NVIDIA streaming",
+      "status": "passed",
+      "durationMs": 1860
+    },
+    {
+      "name": "AI SDK calculator execution and follow-up turn",
+      "status": "passed",
+      "durationMs": 1453
+    },
+    {
+      "name": "Skill instructions automatically selected for a task",
+      "status": "passed",
+      "durationMs": 1202
+    },
+    {
+      "name": "Browser-restored conversation context",
+      "status": "passed",
+      "durationMs": 783
+    },
+    {
+      "name": "Custom agent configuration and prompt",
+      "status": "passed",
+      "durationMs": 1386
+    },
+    {
+      "name": "Live web-search tool and cited answer",
+      "status": "passed",
+      "durationMs": 2664
+    },
+    {
+      "name": "Memory save, recall and removal",
+      "status": "passed",
+      "durationMs": 219
+    },
+    {
+      "name": "File upload, indexing and duplicate detection",
+      "status": "passed",
+      "durationMs": 653
+    },
+    {
+      "name": "Grounded document question with citations",
+      "status": "passed",
+      "durationMs": 1709
+    },
+    {
+      "name": "Unsupported document question returns not-found",
+      "status": "passed",
+      "durationMs": 401
+    },
+    {
+      "name": "Semantic file retrieval resolves cost to budget",
+      "status": "passed",
+      "durationMs": 951
+    },
+    {
+      "name": "NVIDIA document summary completes",
+      "status": "passed",
+      "durationMs": 1060
+    },
+    {
+      "name": "Team discussion, peer review, synthesis and live events",
+      "status": "passed",
+      "durationMs": 21163
+    },
+    {
+      "name": "Validation rejects malformed chat requests",
+      "status": "passed",
+      "durationMs": 27
+    },
+    {
+      "name": "Delete synthetic verification file",
+      "status": "passed",
+      "durationMs": 40
+    }
+  ]
+}

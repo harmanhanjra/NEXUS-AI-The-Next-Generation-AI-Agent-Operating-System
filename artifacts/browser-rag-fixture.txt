@@ -1,0 +1,7 @@
+Nexus browser verification document
+
+The fictional Nimbus initiative has a budget of 4200 credits.
+Its launch code is ORCHID-731.
+Mira is the project owner.
+
+This synthetic file is used only to test upload, retrieval, and citations.

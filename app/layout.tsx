@@ -10,7 +10,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Nexus AI — Agent OS by Harman Hanjra',
-  description: 'Your Mind, Multiplied. Multi-agent AI workspace powered by Gemini. Built by Harman Hanjra.',
+  description: 'NVIDIA-powered agent workspace with tools, local skills, grounded documents, and team collaboration. Built by Harman Hanjra.',
   authors: [{ name: 'Harman Hanjra', url: 'https://github.com/harmanhanjra' }],
   creator: 'Harman Hanjra',
   openGraph: {

@@ -3,7 +3,13 @@
   "framework": "nextjs",
   "functions": {
     "app/api/chat/route.ts": {
-      "maxDuration": 60
+      "maxDuration": 180
+    },
+    "app/api/rooms/[roomId]/run/route.ts": {
+      "maxDuration": 300
+    },
+    "app/api/documents/route.ts": {
+      "maxDuration": 180
     }
   }
 }

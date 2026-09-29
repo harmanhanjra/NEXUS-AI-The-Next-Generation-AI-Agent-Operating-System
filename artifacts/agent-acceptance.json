@@ -1,0 +1,114 @@
+{
+  "checkedAt": "2026-09-29T05:10:05.916Z",
+  "checks": [
+    {
+      "name": "head: exact arithmetic with tool",
+      "status": "passed",
+      "answer": "391",
+      "durationMs": 6124
+    },
+    {
+      "name": "head: coding outside specialty",
+      "status": "passed",
+      "answer": "def is_even(n):\n    return n % 2 == 0",
+      "durationMs": 906
+    },
+    {
+      "name": "head: creative writing outside specialty",
+      "status": "passed",
+      "answer": "Amber the fox trotted through the autumn leaves until she spotted a bright blue umbrella caught in the brambles. She nudged it free with her nose, delighted by its splash of color against the gray forest floor.",
+      "durationMs": 2205
+    },
+    {
+      "name": "research: exact arithmetic with tool",
+      "status": "passed",
+      "answer": "391",
+      "durationMs": 1538
+    },
+    {
+      "name": "research: coding outside specialty",
+      "status": "passed",
+      "answer": "```python\ndef is_even(n):\n    return n % 2 == 0\n```",
+      "durationMs": 15688
+    },
+    {
+      "name": "research: creative writing outside specialty",
+      "status": "failed",
+      "error": "[{\"event\":\"tool_call\",\"data\":{\"name\":\"skills_load\",\"args\":\"Automatic task matching\",\"result\":\"stock-correlation, find-animation-opportunities\",\"success\":true}},{\"event\":\"thinking\",\"data\":\"Nexus harness · nvidia/nemotron-3-super-120b-a12b\"},{\"event\":\"thinking\",\"data\":\"Agent step 1/5 · NVIDIA NIM\"},{\"event\":\"thinking\",\"data\":\"The model could not run the tool loop. Retrying with standard chat…\"},{\"event\":\"thinking\",\"data\":\"Routing to nvidia/nemotron-3-super-120b-a12b…\"},{\"event\":\"tool_call\",\"data\":{\"name\":\"memory.recall\",\"args\":\"query=\\\"Write exactly two short sentences of a f…\\\"\",\"result\":\"no matches\",\"success\":true}},{\"event\":\"thinking\",\"data\":\"NVIDIA model unavailable. Trying nvidia/nemotron-3.5-lightning-30b-a3b with the same NVIDIA key…\"},{\"event\":\"tool_call\",\"data\":{\"name\":\"skills_load\",\"args\":\"Automatic task matching\",\"result\":\"stock-correlation, find-animation-opportunities\",\"success\":true}},{\"event\":\"thinking\",\"data\":\"Nexus harness · nvidia/nemotron-3.5-lightning-30b-a3b\"},{\"event\":\"error\",\"data\":\"NVIDIA model nvidia/nemotron-3.5-lightning-30b-a3b did not start answering within 60 seconds.\"}]\n\ntrue !== false\n"
+    },
+    {
+      "name": "coding: exact arithmetic with tool",
+      "status": "passed",
+      "answer": "391",
+      "durationMs": 2632
+    },
+    {
+      "name": "coding: coding outside specialty",
+      "status": "passed",
+      "answer": "def is_even(n):\n    return n % 2 == 0",
+      "durationMs": 1107
+    },
+    {
+      "name": "coding: creative writing outside specialty",
+      "status": "passed",
+      "answer": "Amber the fox trotted through the autumn leaves when a bright blue umbrella caught her eye, half-buried in the damp earth. She nudged it free with her nose, delighted by its cool silk and the way it smelled faintly of rain and adventure.",
+      "durationMs": 1618
+    },
+    {
+      "name": "content: exact arithmetic with tool",
+      "status": "passed",
+      "answer": "391",
+      "durationMs": 1957
+    },
+    {
+      "name": "content: coding outside specialty",
+      "status": "passed",
+      "answer": "def is_even(n):\n    return n % 2 == 0",
+      "durationMs": 737
+    },
+    {
+      "name": "content: creative writing outside specialty",
+      "status": "passed",
+      "answer": "Amber the fox crept through the rain-slicked ferns, her nose twitching at the scent of wet earth and something unfamiliar. There, caught in the brambles, lay a blue umbrella, its curve like a captured sky.",
+      "durationMs": 2673
+    },
+    {
+      "name": "business: exact arithmetic with tool",
+      "status": "passed",
+      "answer": "391",
+      "durationMs": 1618
+    },
+    {
+      "name": "business: coding outside specialty",
+      "status": "passed",
+      "answer": "def is_even(n):\n    return n % 2 == 0",
+      "durationMs": 1358
+    },
+    {
+      "name": "business: creative writing outside specialty",
+      "status": "failed",
+      "error": "[{\"event\":\"tool_call\",\"data\":{\"name\":\"skills_load\",\"args\":\"Automatic task matching\",\"result\":\"stock-correlation, find-animation-opportunities\",\"success\":true}},{\"event\":\"thinking\",\"data\":\"Nexus harness · nvidia/nemotron-3-super-120b-a12b\"},{\"event\":\"thinking\",\"data\":\"Agent step 1/5 · NVIDIA NIM\"},{\"event\":\"thinking\",\"data\":\"The model could not run the tool loop. Retrying with standard chat…\"},{\"event\":\"thinking\",\"data\":\"Routing to nvidia/nemotron-3-super-120b-a12b…\"},{\"event\":\"tool_call\",\"data\":{\"name\":\"memory.recall\",\"args\":\"query=\\\"Write exactly two short sentences of a f…\\\"\",\"result\":\"no matches\",\"success\":true}},{\"event\":\"thinking\",\"data\":\"NVIDIA model unavailable. Trying nvidia/nemotron-3.5-lightning-30b-a3b with the same NVIDIA key…\"},{\"event\":\"tool_call\",\"data\":{\"name\":\"skills_load\",\"args\":\"Automatic task matching\",\"result\":\"stock-correlation, find-animation-opportunities\",\"success\":true}},{\"event\":\"thinking\",\"data\":\"Nexus harness · nvidia/nemotron-3.5-lightning-30b-a3b\"},{\"event\":\"error\",\"data\":\"NVIDIA model nvidia/nemotron-3.5-lightning-30b-a3b did not start answering within 60 seconds.\"}]\n\ntrue !== false\n"
+    },
+    {
+      "name": "life: exact arithmetic with tool",
+      "status": "failed",
+      "error": "[{\"event\":\"thinking\",\"data\":\"Nexus harness · nvidia/nemotron-3-super-120b-a12b\"},{\"event\":\"thinking\",\"data\":\"Agent step 1/5 · NVIDIA NIM\"},{\"event\":\"thinking\",\"data\":\"The model could not run the tool loop. Retrying with standard chat…\"},{\"event\":\"thinking\",\"data\":\"Routing to nvidia/nemotron-3-super-120b-a12b…\"},{\"event\":\"tool_call\",\"data\":{\"name\":\"memory.recall\",\"args\":\"query=\\\"Use the calculator to compute 17 * 23. A…\\\"\",\"result\":\"no matches\",\"success\":true}},{\"event\":\"thinking\",\"data\":\"NVIDIA model unavailable. Trying nvidia/nemotron-3.5-lightning-30b-a3b with the same NVIDIA key…\"},{\"event\":\"thinking\",\"data\":\"Nexus harness · nvidia/nemotron-3.5-lightning-30b-a3b\"},{\"event\":\"error\",\"data\":\"NVIDIA model nvidia/nemotron-3.5-lightning-30b-a3b did not start answering within 60 seconds.\"}]\n\ntrue !== false\n"
+    },
+    {
+      "name": "life: coding outside specialty",
+      "status": "passed",
+      "answer": "def is_even(n):\n    return n % 2 == 0",
+      "durationMs": 2197
+    },
+    {
+      "name": "life: creative writing outside specialty",
+      "status": "failed",
+      "error": "[{\"event\":\"tool_call\",\"data\":{\"name\":\"skills_load\",\"args\":\"Automatic task matching\",\"result\":\"stock-correlation, find-animation-opportunities\",\"success\":true}},{\"event\":\"thinking\",\"data\":\"Nexus harness · nvidia/nemotron-3-super-120b-a12b\"},{\"event\":\"thinking\",\"data\":\"Agent step 1/5 · NVIDIA NIM\"},{\"event\":\"thinking\",\"data\":\"The model could not run the tool loop. Retrying with standard chat…\"},{\"event\":\"thinking\",\"data\":\"Routing to nvidia/nemotron-3-super-120b-a12b…\"},{\"event\":\"tool_call\",\"data\":{\"name\":\"memory.recall\",\"args\":\"query=\\\"Write exactly two short sentences of a f…\\\"\",\"result\":\"no matches\",\"success\":true}},{\"event\":\"thinking\",\"data\":\"NVIDIA model unavailable. Trying nvidia/nemotron-3.5-lightning-30b-a3b with the same NVIDIA key…\"},{\"event\":\"tool_call\",\"data\":{\"name\":\"skills_load\",\"args\":\"Automatic task matching\",\"result\":\"stock-correlation, find-animation-opportunities\",\"success\":true}},{\"event\":\"thinking\",\"data\":\"Nexus harness · nvidia/nemotron-3.5-lightning-30b-a3b\"},{\"event\":\"error\",\"data\":\"NVIDIA model nvidia/nemotron-3.5-lightning-30b-a3b did not start answering within 60 seconds.\"}]\n\ntrue !== false\n"
+    },
+    {
+      "name": "Default head coordinates two real agents and a custom agent",
+      "status": "failed",
+      "error": "[{\"event\":\"tool_call\",\"data\":{\"name\":\"agent_delegate\",\"args\":\"{\\\"agentId\\\":\\\"content\\\",\\\"task\\\":\\\"Write a five-word slogan for a notebook.\\\"}\",\"result\":\"{\\\"agentId\\\":\\\"content\\\",\\\"agent\\\":\\\"Content Creator\\\",\\\"status\\\":\\\"completed\\\",\\\"answer\\\":\\\"Write your thoughts, change your world.\\\"}\",\"success\":true}},{\"event\":\"tool_call\",\"data\":{\"name\":\"agent_delegate\",\"args\":\"{\\\"agentId\\\":\\\"custom-check\\\",\\\"task\\\":\\\"Reply CUSTOM_DELEGATED.\\\"}\",\"result\":\"{\\\"agentId\\\":\\\"custom-check\\\",\\\"agent\\\":\\\"Custom checker\\\",\\\"status\\\":\\\"completed\\\",\\\"answer\\\":\\\"CUSTOM_DELEGATED\\\"}\",\"success\":true}}]"
+    }
+  ]
+}

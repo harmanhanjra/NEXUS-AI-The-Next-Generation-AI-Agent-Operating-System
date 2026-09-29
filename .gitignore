@@ -9,6 +9,7 @@ coverage/
 
 # Next.js
 .next/
+.next-codex-*/
 out/
 build/
 dist/
@@ -25,6 +26,9 @@ yarn-error.log*
 # Local env
 .env*.local
 .env
+/data/nexus-documents.sqlite
+/data/nexus-documents.sqlite-shm
+/data/nexus-documents.sqlite-wal
 
 # Vercel
 .vercel

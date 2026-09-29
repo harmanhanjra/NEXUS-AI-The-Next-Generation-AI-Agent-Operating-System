@@ -39,8 +39,11 @@ export function renderMarkdown(md: string): string {
   // Inline code
   src = src.replace(/`([^`\n]+)`/g, '<code>$1</code>');
 
-  // Links [text](url)
-  src = src.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+  // Links [text](url). Render only web and mail links to prevent active schemes.
+  src = src.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, label, href) => {
+    if (!/^(https?:\/\/|mailto:)/i.test(href)) return label;
+    return `<a href="${href}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+  });
 
   // Lists (process line-by-line)
   const lines = src.split('\n');

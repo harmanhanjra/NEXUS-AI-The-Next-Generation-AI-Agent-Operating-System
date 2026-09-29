@@ -1,0 +1,42 @@
+{
+  "base": "http://localhost:3001",
+  "testedAt": "2026-09-29T04:23:10.764Z",
+  "results": [
+    {
+      "name": "PDF upload and grounded numeric answer",
+      "status": "passed"
+    },
+    {
+      "name": "DOCX upload and grounded numeric answer",
+      "status": "passed"
+    },
+    {
+      "name": "XLSX upload and grounded numeric answer",
+      "status": "passed"
+    },
+    {
+      "name": "Room synthesis remains grounded and excludes unrelated skills",
+      "status": "passed"
+    },
+    {
+      "name": "CSV table extraction and grounded number",
+      "status": "passed"
+    },
+    {
+      "name": "Answer combines two selected files with citations",
+      "status": "passed"
+    },
+    {
+      "name": "Follow-up pronoun resolves the previous file topic",
+      "status": "passed"
+    },
+    {
+      "name": "Retrieval includes the end of a long uploaded file",
+      "status": "passed"
+    },
+    {
+      "name": "An unselected file cannot supply the answer",
+      "status": "passed"
+    }
+  ]
+}

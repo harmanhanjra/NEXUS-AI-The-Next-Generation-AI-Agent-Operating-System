@@ -1,8 +1,8 @@
 {
   "name": "nexus-ai",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "A unified AI operating system where humans and autonomous AI agents work side-by-side across web, mobile, and cloud — replacing dozens of SaaS tools with a single intelligent workspace.",
+  "description": "A unified AI operating system where humans and autonomous AI agents work side-by-side — NVIDIA NIM and any OpenAI-compatible provider behind one normalized streaming layer.",
   "author": {
     "name": "Harman Hanjra",
     "url": "https://github.com/harmanhanjra"
@@ -19,29 +19,48 @@
   "keywords": [
     "ai",
     "agents",
-    "gemini",
+    "nvidia",
+    "nim",
+    "openai-compatible",
     "nextjs",
     "llm",
-    "chatbot",
     "ai-agents",
-    "agent-platform"
+    "agent-platform",
+    "ollama"
   ],
   "scripts": {
-    "dev": "next dev -p 3000",
-    "build": "next build",
-    "start": "next start -p 3000",
-    "lint": "next lint"
+    "dev": "node --use-system-ca node_modules/next/dist/bin/next dev -p 3000",
+    "build": "node --use-system-ca node_modules/next/dist/bin/next build",
+    "start": "node --use-system-ca node_modules/next/dist/bin/next start -p 3000",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test --experimental-strip-types \"tests/**/*.test.ts\"",
+    "test:watch": "node --test --watch --experimental-strip-types \"tests/**/*.test.ts\"",
+    "verify": "npm run typecheck && npm run lint && npm test"
   },
   "dependencies": {
-    "@google/genai": "^1.0.0",
-    "next": "15.0.3",
-    "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106"
+    "@ai-sdk/openai-compatible": "^3.0.58",
+    "@libsql/client": "^0.18.0",
+    "ai": "^7.0.120",
+    "llamaindex": "^0.12.1",
+    "next": "15.5.26",
+    "officeparser": "^8.0.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@types/node": "^22",
-    "@types/react": "npm:types-react@rc",
-    "@types/react-dom": "npm:types-react-dom@rc",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^15.0.3",
     "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=22.6.0"
+  },
+  "overrides": {
+    "postcss": "^8.5.23"
   }
 }
