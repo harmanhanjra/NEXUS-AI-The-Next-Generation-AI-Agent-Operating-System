@@ -86,4 +86,4 @@ The smoke suite sends real NVIDIA requests, creates its own synthetic document w
 
 Next.js 15 and React 19 provide the UI and endpoints. Vercel AI SDK owns the bounded tool loop and compatible streaming. LlamaIndex caches retrieval over room definitions. SQLite/libSQL stores documents. Zod validates tool inputs. A native streaming adapter supports models without tool calling.
 
-Inspired by [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), Nexus focuses on a local visual workspace, NVIDIA routing, document grounding, and installed-skill selection. It is not a compatibility implementation of DeepSeek's plugin runtime; performance superiority has not been benchmarked.
+.
