@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDialog } from './use-dialog';
 type Skill = { id: string; name: string; description: string; path: string };
 
 export function SkillsPanel({ onClose }: { onClose: () => void }) {
@@ -9,15 +10,7 @@ export function SkillsPanel({ onClose }: { onClose: () => void }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [preview, setPreview] = useState<{ skill: Skill; instructions: string } | null>(null);
-  const dialogRef = useRef<HTMLElement>(null);
-  const closeRef = useRef(onClose);
-  useEffect(() => { closeRef.current = onClose; }, [onClose]);
-  useEffect(() => {
-    const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') closeRef.current(); };
-    document.addEventListener('keydown', onKey);
-    dialogRef.current?.querySelector<HTMLElement>('input, textarea, select, button')?.focus();
-    return () => document.removeEventListener('keydown', onKey);
-  }, []);
+  const dialogRef = useDialog(onClose);
   const refresh = async (rescan = false) => {
     setLoading(true); setError('');
     try {

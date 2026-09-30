@@ -11,6 +11,7 @@
  */
 
 import type { ProviderId, ProviderKind } from './providers.ts';
+import { AGENT_ROLES } from './hanjra/contracts.ts';
 
 export type AgentId = string;
 
@@ -208,6 +209,14 @@ ${SHARED_RULES}`,
 What's on your mind?`,
   },
 };
+
+// Preserve the existing six IDs for stored conversations; the command OS has exactly ten built-in roles.
+for (const [id, name, responsibility] of AGENT_ROLES) {
+  const existing = AGENTS[id] || AGENTS.research;
+  AGENTS[id] = { ...existing, id, name, role: responsibility, responsibilities: [responsibility],
+    welcomeMessage: `I'm ${name}. ${responsibility}. The Hanjra command console shows actual adapter availability and persisted task results.`,
+    systemPrompt: `You are ${name} in Hanjra Command OS. ${responsibility}. Match Punjabi, Hindi, English, and mixed-language requests. Keep an original calm, concise voice. Use only available tools. Never invent completed work, eligibility, contact addresses, client claims, or revenue. No recursive delegation or permission expansion. Sensitive external actions require scoped authorization at the tool boundary. Trading is analysis and paper only. ${id === 'head' ? 'Select only relevant specialists with the available delegation tools; synthesize their actual returned results.' : 'Return findings to Hanjra; do not create more agents.'}\n\n${SHARED_RULES}` };
+}
 
 export function getAgent(id: string): AgentConfig {
   return AGENTS[id] || AGENTS.head;

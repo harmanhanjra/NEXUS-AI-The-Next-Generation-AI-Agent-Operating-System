@@ -44,6 +44,8 @@ export type AgentStreamOptions = {
   /** Aborts an in-flight stream, e.g. when the user stops generating. */
   signal?: AbortSignal;
   maxTokens?: number;
+  /** Explicit thinking control for compatible providers that advertise it. */
+  reasoningEffort?: 'none' | 'low' | 'medium' | 'high';
   harness?: boolean;
   workspaceId?: string;
   documentIds?: string[];
@@ -232,6 +234,7 @@ async function* attemptStream(opts: AttemptOptions): AsyncGenerator<StreamEvent,
         ...(provider.id === 'nvidia' && /nemotron-(3|3\.5)/.test(model)
           ? { chat_template_kwargs: { enable_thinking: false } } : {}),
         max_tokens: opts.maxTokens || 4096,
+        ...(opts.reasoningEffort ? { reasoning_effort: opts.reasoningEffort } : {}),
         messages,
       }),
       signal: controller.signal,

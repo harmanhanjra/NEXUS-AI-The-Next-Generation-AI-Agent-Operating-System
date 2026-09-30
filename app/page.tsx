@@ -6,6 +6,10 @@ import { ProviderId, ProviderSettings } from '@/lib/providers';
 import { renderMarkdown } from '@/lib/markdown';
 import { consumeSse } from '@/lib/sse';
 import { SkillsPanel } from './components/SkillsPanel';
+import Link from 'next/link';
+import { ThemeToggle } from './components/theme';
+import { QuickNavigation } from './components/quick-navigation';
+import { useDialog } from './components/use-dialog';
 
 type WorkspaceView = 'chat' | 'rooms' | 'agents';
 
@@ -239,17 +243,7 @@ function formatDuration(duration?: number) {
  * streaming re-renders behind the modal never yank focus back.
  */
 function useModalDismiss(onClose: () => void) {
-  const dialogRef = useRef<HTMLElement>(null);
-  const closeRef = useRef(onClose);
-  useEffect(() => { closeRef.current = onClose; }, [onClose]);
-  useEffect(() => {
-    const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') closeRef.current(); };
-    document.addEventListener('keydown', onKey);
-    const el = dialogRef.current;
-    (el?.querySelector<HTMLElement>('[data-autofocus]') || el?.querySelector<HTMLElement>('input, textarea, select, button'))?.focus();
-    return () => document.removeEventListener('keydown', onKey);
-  }, []);
-  return dialogRef;
+  return useDialog(onClose);
 }
 
 export default function App() {
@@ -459,7 +453,8 @@ export default function App() {
 
   useEffect(() => {
     const stream = messagesEndRef.current?.parentElement;
-    if (stream && (followOutputRef.current || messages.at(-1)?.role === 'user')) stream.scrollTop = stream.scrollHeight;
+    if (stream && messages.length === 0) stream.scrollTop = 0;
+    else if (stream && (followOutputRef.current || messages.at(-1)?.role === 'user')) stream.scrollTop = stream.scrollHeight;
   }, [messages]);
 
   useEffect(() => {
@@ -769,6 +764,7 @@ export default function App() {
     <div className="workspace-shell">
       <Sidebar view={view} setView={setView} activeRoomId={activeRoomId} setActiveRoomId={setActiveRoomId} currentAgentId={currentAgentId} onSelectAgent={selectAgent} onNewChat={startNewChat} onNewAgent={openNewAgent} agents={agentList} recentConversations={recentConversations} activeConversationId={conversationId} onSelectConversation={selectConversation} />
       <main className="workspace-main">
+        <div className="workspace-commandbar"><span className="workspace-breadcrumb">HANJRA <span>/</span> NEXUS WORKSPACE</span><QuickNavigation actions={[{ label: 'Solo chat', detail: 'Talk to your coordinator or a specialist', action: () => setView('chat') }, { label: 'Team rooms', detail: 'Bring specialists together for a review', action: () => setView('rooms') }, { label: 'Agent library', detail: 'Browse and configure your specialists', action: () => setView('agents') }, { label: 'Local intelligence', detail: 'Memory, learning, models and execution traces', href: '/hanjra/intelligence' }, { label: 'Voice command center', detail: 'Speak to Hanjra and inspect durable tasks', href: '/hanjra' }, { label: 'File library', detail: 'Manage documents used as answer sources', action: () => setShowDocuments(true) }, { label: 'Installed skills', detail: 'Browse local capabilities', action: () => setShowSkills(true) }, { label: 'Provider settings', detail: 'Manage your model connection', action: () => setShowSettings(true) }]} /><ThemeToggle /></div>
         <nav className="compact-navigation" aria-label="Workspace navigation">
           <label>View<select aria-label="Workspace view" value={view} onChange={(event) => setView(event.target.value as WorkspaceView)}><option value="chat">Chat</option><option value="rooms">Team rooms</option><option value="agents">Agent library</option></select></label>
           {view === 'rooms' ? <label>Room<select aria-label="Active room" value={activeRoomId} onChange={(event) => setActiveRoomId(event.target.value)}>{ROOMS.map((room) => <option key={room.id} value={room.id}>{room.name}</option>)}</select></label> : <label>Agent<select aria-label="Active agent" value={currentAgentId} onChange={(event) => selectAgent(event.target.value)}>{agentList.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}</select></label>}
@@ -817,12 +813,13 @@ function Sidebar({ view, setView, activeRoomId, setActiveRoomId, currentAgentId,
 }) {
   return (
     <aside className="app-rail">
-      <div className="brand-lockup"><div className="brand-mark">N</div><div><strong>Nexus</strong><span>Agent workspace</span></div></div>
-      <div className="workspace-switcher"><div className="workspace-symbol">N</div><div className="workspace-copy"><strong>Nexus demo</strong><span>Interview workspace</span></div><span className="chevron">⌄</span></div>
+      <div className="brand-lockup"><div className="brand-mark">H</div><div><strong>Hanjra</strong><span>Personal command OS</span></div></div>
+      <Link href="/hanjra" className="workspace-switcher"><div className="workspace-symbol">◎</div><div className="workspace-copy"><strong>Voice command center</strong><span>Speak. Run. Review.</span></div><span className="chevron">↗</span></Link>
       <nav className="primary-nav" aria-label="Primary navigation">
-        <button className={view === 'rooms' ? 'active' : ''} onClick={() => setView('rooms')}><NavIcon type="rooms" />Team rooms<span className="nav-count">3</span></button>
-        <button className={view === 'chat' ? 'active' : ''} onClick={() => setView('chat')}><NavIcon type="chat" />Solo chat</button>
-        <button className={view === 'agents' ? 'active' : ''} onClick={() => setView('agents')}><NavIcon type="agents" />Agent library</button>
+        <Link href="/hanjra/intelligence" className="workspace-switcher"><div className="workspace-copy"><strong>Local intelligence</strong><span>Memory, learning, models & traces</span></div><span className="chevron">↗</span></Link>
+        <button className={view === 'rooms' ? 'active' : ''} aria-pressed={view === 'rooms'} onClick={() => setView('rooms')}><NavIcon type="rooms" />Team rooms<span className="nav-count">3</span></button>
+        <button className={view === 'chat' ? 'active' : ''} aria-pressed={view === 'chat'} onClick={() => setView('chat')}><NavIcon type="chat" />Solo chat</button>
+        <button className={view === 'agents' ? 'active' : ''} aria-pressed={view === 'agents'} onClick={() => setView('agents')}><NavIcon type="agents" />Agent library</button>
       </nav>
       <div className="rail-label">Rooms</div>
       <div className="room-list">
@@ -846,6 +843,7 @@ function Topbar({ view, activeRoom, agent, provider, hasKey, documentCount, onOp
 }
 
 function RoomView({ room, agents, roomAgentIds, onToggleAgent, onOpenAgentLibrary, run, error, streaming, input, setInput, onSend, onStop, onChoosePrompt, selectedFiles, onUploadFile, onRemoveFile, uploadingFile, fileError }: { selectedFiles: Array<{ id: string; name: string }>; onUploadFile: (file: File) => void; onRemoveFile: (id: string) => void; uploadingFile: boolean; fileError: string; room: typeof ROOMS[number]; agents: AgentConfig[]; roomAgentIds: string[]; onToggleAgent: (id: string) => void; onOpenAgentLibrary: () => void; run: RoomRun | null; error: string; streaming: boolean; input: string; setInput: (value: string) => void; onSend: () => void; onStop: () => void; onChoosePrompt: (value: string) => void }) {
+  const [showSetup, setShowSetup] = useState(false);
   const completed = run?.steps.filter((step) => step.status === 'completed').length || 0;
   const total = run?.steps.length || roomAgentIds.length;
   return (
@@ -856,6 +854,7 @@ function RoomView({ room, agents, roomAgentIds, onToggleAgent, onOpenAgentLibrar
             <span className="section-kicker">Shared mission · {room.name}</span>
             <h2>{room.mission}</h2>
             <p>{room.missionDetail}</p>
+            <button className="secondary-button room-setup-trigger" onClick={() => setShowSetup(true)}>Choose specialists <span aria-hidden="true">↗</span></button>
             <div className="room-coordination-strip" aria-label="Coordination protocol">
               <span><i>01</i>Discuss</span><span className="coord-arrow">→</span>
               <span><i>02</i>Peer-review</span><span className="coord-arrow">→</span>
@@ -864,7 +863,7 @@ function RoomView({ room, agents, roomAgentIds, onToggleAgent, onOpenAgentLibrar
           </div>
           <div className="hero-signal">
             <span>Room health</span>
-            <strong>{run ? `${completed}/${total} answered` : 'All systems nominal'}</strong>
+    <strong>{run ? `${completed}/${total} answered` : `${total} specialists selected`}</strong>
             <div className="health-bars" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /><i /><i /><i /><i /><i /></div>
           </div>
         </div>
@@ -875,8 +874,14 @@ function RoomView({ room, agents, roomAgentIds, onToggleAgent, onOpenAgentLibrar
         <Composer input={input} setInput={setInput} onSend={onSend} onStop={onStop} streaming={streaming} placeholder="Ask the room to investigate, decide, or build…" inputLabel="Message the team room" hasKey={true} onOpenSettings={() => undefined} selectedFiles={selectedFiles} onUploadFile={onUploadFile} onRemoveFile={onRemoveFile} uploadingFile={uploadingFile} fileError={fileError} room />
       </section>
           <RoomInspector run={run} room={room} agents={agents} roomAgentIds={roomAgentIds} onToggleAgent={onToggleAgent} onOpenAgentLibrary={onOpenAgentLibrary} />
+      {showSetup && <RoomSetupDialog onClose={() => setShowSetup(false)}><RoomInspector run={run} room={room} agents={agents} roomAgentIds={roomAgentIds} onToggleAgent={onToggleAgent} onOpenAgentLibrary={() => { setShowSetup(false); onOpenAgentLibrary(); }} /></RoomSetupDialog>}
     </div>
   );
+}
+
+function RoomSetupDialog({ children, onClose }: { children: React.ReactNode; onClose: () => void }) {
+  const ref = useDialog(onClose);
+  return <div className="modal-backdrop" onClick={e => { if (e.target === e.currentTarget) onClose(); }}><section ref={ref} tabIndex={-1} className="settings-modal room-setup-dialog" role="dialog" aria-modal="true" aria-labelledby="room-setup-title"><div className="modal-header"><h2 id="room-setup-title">Choose your room team</h2><button className="close-button" onClick={onClose} aria-label="Close room setup">×</button></div>{children}<div className="modal-footer"><button className="primary-button" onClick={onClose}>Done</button></div></section></div>;
 }
 
 function RoomEmpty({ roomName, onChoosePrompt }: { roomName: string; onChoosePrompt: (value: string) => void }) {
@@ -909,7 +914,9 @@ function CheckMark() {
 }
 
 function AgentsView({ agents, onNewAgent, onEditAgent, onSelectAgent }: { agents: AgentConfig[]; onNewAgent: () => void; onEditAgent: (agent: AgentConfig) => void; onSelectAgent: (id: string) => void }) {
-  return <div className="agents-page"><div className="agents-page-header"><div><span className="section-kicker">Workspace registry</span><h2>Agent library</h2><p>Create specialists, assign their model, and change responsibilities whenever the work changes.</p></div><button className="primary-button" onClick={onNewAgent}>＋ Create agent</button></div><div className="agent-library-grid">{agents.map((item) => <article className="library-card" key={item.id}><div className="library-card-top"><span className="large-avatar" style={{ background: item.gradient }}>{item.name.slice(0, 1)}</span><span className="library-status">Ready</span></div><h3>{item.name}</h3><p>{item.role || 'Specialist agent'}</p><div className="library-model"><span>{providerLabel(item.providerId || item.provider || 'nvidia')}</span><strong>{item.model || 'Automatic workspace model'}</strong></div><div className="library-responsibilities">{(item.responsibilities || []).slice(0, 3).map((responsibility) => <span key={responsibility}>{responsibility}</span>)}</div><div className="library-card-actions"><button className="secondary-button" onClick={() => onEditAgent(item)}>Configure</button><button className="text-button" onClick={() => onSelectAgent(item.id)}>Open chat →</button></div></article>)}</div></div>;
+  const [query, setQuery] = useState('');
+  const filtered = agents.filter(item => `${item.name} ${item.role} ${(item.responsibilities || []).join(' ')}`.toLowerCase().includes(query.toLowerCase()));
+  return <div className="agents-page"><div className="agents-page-header"><div><span className="section-kicker">Your specialist network</span><h2>The right mind for the task.</h2><p>Find a specialist, tune its responsibilities, or bring it into your next conversation.</p></div><button className="primary-button" onClick={onNewAgent}>＋ Create agent</button></div><div className="library-search"><label>Find a specialist<input type="search" value={query} onChange={e => setQuery(e.target.value)} placeholder="Search names, roles, or responsibilities" /></label><span role="status">{filtered.length} of {agents.length} agents</span></div><div className="agent-library-grid">{filtered.map((item) => <article className="library-card" key={item.id}><div className="library-card-top"><span className="large-avatar" style={{ background: item.gradient }}>{item.name.slice(0, 1)}</span><span className="library-status">Configured</span></div><h3>{item.name}</h3><p>{item.role || 'Specialist agent'}</p><div className="library-model"><span>{providerLabel(item.providerId || item.provider || 'nvidia')}</span><strong>{item.model || 'Automatic workspace model'}</strong></div><div className="library-responsibilities">{(item.responsibilities || []).slice(0, 3).map((responsibility) => <span key={responsibility}>{responsibility}</span>)}</div><div className="library-card-actions"><button className="secondary-button" onClick={() => onEditAgent(item)}>Configure</button><button className="text-button" onClick={() => onSelectAgent(item.id)}>Open chat →</button></div></article>)}{filtered.length === 0 && <p className="library-no-results">No matching specialist. Try “research”, “coding”, or “career”.</p>}</div></div>;
 }
 
 function AgentEditorModal({ agent, onSave, onDelete, onClose }: { agent: AgentConfig; onSave: (agent: AgentConfig) => void; onDelete: (id: string) => void; onClose: () => void }) {

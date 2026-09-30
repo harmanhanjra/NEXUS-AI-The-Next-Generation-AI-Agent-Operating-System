@@ -1,5 +1,7 @@
 # Nexus AI — NVIDIA Agent Workspace
 
+The local [Hanjra command console](docs/HANJRA.md) adds durable tasks, explicit speech adapters, evidence, and scoped policy. Start with `npm run hanjra`, then open `http://127.0.0.1:3013/hanjra`. See its capability report for tested paths and remaining integrations.
+
 Created by [Harman Hanjra](https://github.com/harmanhanjra). MIT licensed.
 
 Nexus runs a default Head Agent, five specialists, custom agents, grounded document Q&A, and team discussions using NVIDIA NIM or an OpenAI-compatible endpoint. NVIDIA is the default provider.
@@ -72,6 +74,9 @@ The local database defaults to data/nexus-documents.sqlite. Configure hosted lib
 
 ## Validation
 
+See [the 1 October verification record](docs/VERIFICATION-2026-10-01.md)
+for current checks and remaining product work.
+
 ~~~powershell
 npm run verify
 npm run build
@@ -87,3 +92,10 @@ The smoke suite sends real NVIDIA requests, creates its own synthetic document w
 Next.js 15 and React 19 provide the UI and endpoints. Vercel AI SDK owns the bounded tool loop and compatible streaming. LlamaIndex caches retrieval over room definitions. SQLite/libSQL stores documents. Zod validates tool inputs. A native streaming adapter supports models without tool calling.
 
 .
+# Local intelligence workspace
+
+Open `/hanjra/intelligence` on the local Hanjra server for memory, reviewed learning, installed Ollama models, device capacity, and execution traces. It is linked from both the voice console and Nexus workspace.
+
+The local intelligence layer uses SQLite, BM25 note retrieval, and a CPU-only Naive Bayes specialist classifier. It learns from explicit positive task reviews; action permissions remain governed by deterministic policy. See [OpenJarvis analysis and implementation](docs/OPENJARVIS-ANALYSIS.md) for architecture decisions, boundaries, and verification.
+
+With the local server running, `node scripts/smoke-hanjra-intelligence.mjs` checks authentication, memory archive/restore, a real local model response with retrieved-note evidence, and feedback replacement. It assumes the saved **Hanjra project stack** note exists and archives its temporary acceptance note after checking it.
