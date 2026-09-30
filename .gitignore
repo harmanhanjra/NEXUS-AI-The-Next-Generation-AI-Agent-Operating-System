@@ -29,6 +29,12 @@ yarn-error.log*
 /data/nexus-documents.sqlite
 /data/nexus-documents.sqlite-shm
 /data/nexus-documents.sqlite-wal
+/data/hanjra.sqlite*
+/data/hanjra-audio/
+/data/hanjra-artifacts/
+/data/hanjra-backups/
+/data/hanjra-test-*/
+/artifacts/hanjra/
 
 # Vercel
 .vercel
